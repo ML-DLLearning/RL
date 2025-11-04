@@ -1,54 +1,9 @@
-{
- "cells": [
-  {
-   "cell_type": "markdown",
-   "id": "0bce5f86",
-   "metadata": {},
-   "source": [
-    "## Policy Gradients"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "8d84f1b6",
-   "metadata": {},
-   "source": [
-    "当动作有无穷多个的时候这种方法就起到作用了，它能在一个连续区间内挑选动作  \n",
-    "之前我们说到的 value-based 方法输出的都是不连续的值, 然后再选择值最大的 action. 而 policy gradient 可以在一个连续分布上选取 action.  \n",
-    "\n",
-    "更新方式$$θ ← θ + α∇_θ log π_θ(s_t, a_t)v_t$$\n",
-    "$log π_θ(s_t, a_t):$是“当前策略在st状态下选at动作的对数概率”，可以理解为选中该动作的“惊喜度”或“罕见度”  \n",
-    "$v_t:$表示从t时刻开始的累积奖励，即后续所有reward的折扣和（discounted return）  \n"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "id": "c83c8b7a",
-   "metadata": {},
-   "source": [
-    "$∇(log(Policy(s, a)) * V):$动作a在s下被当前策略选中的对数概率 × 该步获得的回报，表示***状态 s 对所选动作 a 的吃惊度***  \n",
-    "\n",
-    "$感性理解：$如果$Policy(s, a)$很小，那么反向的$log(Policy(s,a))$ (即 $-log(P)$) 反而越大,如果在这种情况下，$V$又很大，那么$∇(log(Policy(s, a)) * V)$更大，表示更吃惊（无心插柳柳成荫），所以对参数$θ$的更新也就更大"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "dc7ba194",
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "import gym\n",
-    "from RL_brain import PolicyGradient\n",
-    "import matplotlib.pyplot as plt"
-   ]
-  }
- ],
- "metadata": {
-  "language_info": {
-   "name": "python"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+## Policy Gradients
+当动作有无穷多个的时候这种方法就起到作用了，它能在一个连续区间内挑选动作  
+之前我们说到的 value-based 方法输出的都是不连续的值, 然后再选择值最大的 action. 而 policy gradient 可以在一个连续分布上选取 action.  
+
+更新方式$$θ ← θ + α∇_θ log π_θ(s_t, a_t)v_t$$  
+$log π_θ(s_t, a_t):$是“当前策略在st状态下选at动作的对数概率”，可以理解为选中该动作的“惊喜度”或“罕见度”  
+$v_t:$表示从t时刻开始的累积奖励，即后续所有reward的折扣和（discounted return）  
+$∇(log(Policy(s, a)) * V):$动作a在s下被当前策略选中的对数概率 × 该步获得的回报，表示***状态 s 对所选动作 a 的吃惊度***  
+$感性理解：$如果$Policy(s, a)$很小，那么反向的$log(Policy(s,a))$ (即 $-log(P)$) 反而越大,如果在这种情况下，$V$又很大，那么$∇(log(Policy(s, a)) * V)$更大，表示更吃惊（无心插柳柳成荫），所以对参数$θ$的更新也就更大
